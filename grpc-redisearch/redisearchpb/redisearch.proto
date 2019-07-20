@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package redisearch;
+option go_package = 'redisearchpb';
+
+message Searcher {
+    string movie = 1;
+}
+
+message Suggester {
+    string movie = 1;
+}
+
+message Request {
+    Searcher searcher = 1;
+    Suggester suggester = 2;
+}
+message SearchResponse {
+    string title = 1;
+    int64 movieId = 2; 
+}
+
+message SuggestResponse {
+    string title = 1;
+}
+
+service Service {
+    rpc Search(Request) returns (stream SearchResponse) {};
+    rpc Suggest(Request) returns (stream SuggestResponse) {};
+}

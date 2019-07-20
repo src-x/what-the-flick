@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package recommend;
+option go_package = 'recommendpb';
+
+message Recommender {
+    string movie = 1;
+}
+
+message RecommendRequest {
+    Recommender recommender = 1;
+}
+
+message RecommendResponse {
+    string movieTitle = 1;
+    int64 movieId = 2;
+}
+
+service RecommendService {
+    rpc Recommend(RecommendRequest) returns (stream RecommendResponse) {};
+}
